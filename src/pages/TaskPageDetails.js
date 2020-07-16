@@ -4,13 +4,15 @@ import TaskButton from '../components/TaskButton'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 
-export default function TaskPageDetails() {
+export default function TaskPageDetails({ tasks, handleSetTimestamp }) {
   const { callNumber } = useParams()
+  // our current task
+  const task = tasks.find((el) => el.call_number === callNumber)
 
   return (
     <StyledDiv>
-      <TaskButton callNumber={callNumber}>{callNumber}</TaskButton>
-      <TaskListItem />
+      <TaskButton callNumber={callNumber} />
+      <TaskListItem handleSetTimestamp={handleSetTimestamp} task={task} />
     </StyledDiv>
   )
 }

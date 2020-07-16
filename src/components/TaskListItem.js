@@ -1,52 +1,33 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import dayjs from 'dayjs'
 
-export default function TaskListItem() {
-  let timeStamp = dayjs().format('HH:mm')
-  const [start, setStart] = useState('')
-  const [arrival, setArrival] = useState('')
-  const [done, setDone] = useState('')
-
-  function setTimestamp(status) {
-    if (status === 'start') {
-      setStart(timeStamp)
-      alert('Los geht´s, Gute Fahrt!')
-    } else if (status === 'arrival') {
-      setArrival(timeStamp)
-      alert('Angekommen. Viel Erfolg beim Kunden!')
-    } else {
-      setDone(timeStamp)
-      alert('Du hast es geschafft!! Glückwunsch.')
-    }
-  }
-
+export default function TaskListItem({ task, handleSetTimestamp }) {
   return (
     <StyledStatusSection>
       <StyledButton
-        className={start ? 'active' : ''}
+        className={task.start ? 'active' : ''}
         onClick={() => {
-          setTimestamp('start')
+          handleSetTimestamp('start', task.call_number)
         }}
       >
         Start
       </StyledButton>
       <StyledButton
-        className={arrival ? 'active' : ''}
-        onClick={() => setTimestamp('arrival')}
+        className={task.arrival ? 'active' : ''}
+        onClick={() => handleSetTimestamp('arrival', task.call_number)}
       >
         Ankunft
       </StyledButton>
       <StyledButton
-        className={done ? 'active' : ''}
-        onClick={() => setTimestamp('done')}
+        className={task.done ? 'active' : ''}
+        onClick={() => handleSetTimestamp('done', task.call_number)}
       >
         Erledigt
       </StyledButton>
       <StyledDiv>
-        <div>{start}</div>
-        <div>{arrival}</div>
-        <div>{done}</div>
+        <div>{task.start}</div>
+        <div>{task.arrival}</div>
+        <div>{task.done}</div>
       </StyledDiv>
     </StyledStatusSection>
   )

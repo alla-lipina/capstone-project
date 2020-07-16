@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import tasks from './tasks.json'
+// import tasks from './tasks.json'
 import { NavLink } from 'react-router-dom'
 import TaskButton from '../components/TaskButton'
 
-export default function TaskList() {
+export default function TaskList({ tasks }) {
   return (
     <StyledSection>
       {tasks.map((task) => (
@@ -13,9 +13,7 @@ export default function TaskList() {
           key={task.call_number}
           to={`/taskpagedetails/${task.call_number}`}
         >
-          <TaskButton callNumber={task.call_number}>
-            {task.call_number}
-          </TaskButton>
+          <TaskButton callNumber={task.call_number} />
         </StyledNavLink>
       ))}
     </StyledSection>
